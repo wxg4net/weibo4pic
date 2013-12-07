@@ -43,7 +43,8 @@ def main():
   try:
     r = c.statuses.upload.post(status=u'图片预览', pic=StringIO(fileContent))
     title =  u'图片上传提醒'
-    body =  r['original_pic']
+    rr = c.short_url.shorten.get(url_long=r['original_pic'])
+    body = rr['urls'][0]['url_short']
     print body
   except:
     title =  u'图片上传提醒'

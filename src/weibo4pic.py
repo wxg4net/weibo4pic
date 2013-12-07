@@ -37,11 +37,8 @@ def main():
   c = APIClient('2271670378', '81de0a49e985565466e708148544a3d8', 'http://127.0.0.1:8090/do/')
   c = authorize_clent(c, flags)
  
-  with open(flags.filename, mode='rb') as file:
-    fileContent = file.read()
-    
   try:
-    r = c.statuses.upload.post(status=u'图片预览', pic=StringIO(fileContent))
+    r = c.statuses.upload.post(status=u'图片预览', pic=open(flags.filename, mode='rb'))
     title =  u'图片上传提醒'
     rr = c.short_url.shorten.get(url_long=r['original_pic'])
     body = rr['urls'][0]['url_short']
